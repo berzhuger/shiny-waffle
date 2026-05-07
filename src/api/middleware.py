@@ -11,7 +11,10 @@ class CorrelationIdMMiddleware(BaseHTTPMiddleware):
     """
     Middleware to add a unique correlation ID to each request for better traceability in logs.
     """
-    async def dispatch(self, request: Request, call_next: Callable[[Request], Awaitable[Response]]) -> Response:
+
+    async def dispatch(
+        self, request: Request, call_next: Callable[[Request], Awaitable[Response]]
+    ) -> Response:
         correlation_id = request.headers.get("x-correlation-id") or str(uuid.uuid4())
         structlog.contextvars.bind_contextvars(correlation_id=correlation_id)
         try:

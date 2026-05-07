@@ -12,6 +12,7 @@ def configure_logging(level: str = "INFO", json_logs: bool = True) -> None:
         structlog.processors.StackInfoRenderer(),
     ]
 
+    processors: list[Processor]
     if json_logs:
         processors = [*shared_processors, structlog.processors.JSONRenderer()]
     else:
@@ -21,6 +22,7 @@ def configure_logging(level: str = "INFO", json_logs: bool = True) -> None:
         processors=processors,
         wrapper_class=structlog.make_filtering_bound_logger(getattr(logging, level)),
         cache_logger_on_first_use=True,
-        )
+    )
+
 
 logger = structlog.get_logger()
