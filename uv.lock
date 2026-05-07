@@ -1975,12 +1975,9 @@ version = "0.1.0"
 source = { virtual = "." }
 dependencies = [
     { name = "fastapi" },
-    { name = "mypy" },
     { name = "ollama" },
     { name = "pydantic-settings" },
-    { name = "pytest" },
     { name = "qdrant-client" },
-    { name = "ruff" },
     { name = "structlog" },
 ]
 
@@ -2000,12 +1997,9 @@ eval = [
 [package.metadata]
 requires-dist = [
     { name = "fastapi", specifier = ">=0.136.1" },
-    { name = "mypy", specifier = ">=2.0.0" },
     { name = "ollama", specifier = ">=0.6.2" },
     { name = "pydantic-settings", specifier = ">=2.14.0" },
-    { name = "pytest", specifier = ">=9.0.3" },
     { name = "qdrant-client", specifier = ">=1.17.1" },
-    { name = "ruff", specifier = ">=0.15.12" },
     { name = "structlog", specifier = ">=25.5.0" },
 ]
 

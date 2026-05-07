@@ -13,9 +13,9 @@ def configure_logging(level: str = "INFO", json_logs: bool = True) -> None:
     ]
 
     if json_logs:
-        processors = shared_processors + [structlog.processors.JSONRenderer()]
+        processors = [*shared_processors, structlog.processors.JSONRenderer()]
     else:
-        processors = shared_processors + [structlog.dev.ConsoleRenderer()]
+        processors = [*shared_processors, structlog.dev.ConsoleRenderer()]
 
     structlog.configure(
         processors=processors,
