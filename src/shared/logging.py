@@ -1,11 +1,11 @@
-import structlog
 import logging
 
-def configure_logging(level: str = "INFO", json_logs: bool = True):
-    """
-    Configures structlog for structured logging.
-    """
-    shared_processor = [
+import structlog
+from structlog.types import Processor
+
+
+def configure_logging(level: str = "INFO", json_logs: bool = True) -> None:
+    shared_processors: list[Processor] = [
         structlog.contextvars.merge_contextvars,
         structlog.processors.add_log_level,
         structlog.processors.TimeStamper(fmt="iso"),
@@ -13,9 +13,9 @@ def configure_logging(level: str = "INFO", json_logs: bool = True):
     ]
 
     if json_logs:
-        processors = shared_processor + [structlog.processors.JSONRenderer()]
+        processors = shared_processors + [structlog.processors.JSONRenderer()]
     else:
-        processors = shared_processor + [structlog.dev.ConsoleRenderer()]
+        processors = shared_processors + [structlog.dev.ConsoleRenderer()]
 
     structlog.configure(
         processors=processors,
